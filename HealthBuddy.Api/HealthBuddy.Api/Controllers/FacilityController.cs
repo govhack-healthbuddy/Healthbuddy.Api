@@ -12,7 +12,8 @@ namespace HealthBuddy.Api.Controllers
     public class FacilityController : ApiController
     {
         // GET: api/Main/Origin
-        public FacilitySearchResult Get(string latitude, string longitude, string gender, bool isChild, bool generalPractice, bool hospital)
+        [HttpGet]
+        public FacilitySearchResult Get(string latitude, string longitude, string gender, bool isChild)
         {
             FacilitySearchResult result = new FacilitySearchResult();
 
@@ -22,13 +23,13 @@ namespace HealthBuddy.Api.Controllers
             var google = new HealthBuddy.Api.Directions.DirectionsService();
             google.Lookup(result.Origin);
 
-            if (generalPractice)
+            //if (generalPractice)
             {
                 var nhsd = new HealthBuddy.Api.Nhsd.NhsdService();
                 result.Facilities.AddRange(nhsd.Search(result.Origin));
             }
             
-            if (hospital)
+            //if (hospital)
             {
                 // TODO: Get data from database
             }
