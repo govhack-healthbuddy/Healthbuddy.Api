@@ -17,6 +17,8 @@ namespace HealthBuddy.Api.Model
 
         public double? LessThan4HrsPct { get; set; }
 
+        public int? TwitterSentiment { get; set; }
+
         public EmergencyDepartmentStatus EmergencyDepartmentStatus { get; set; }
     }
 }

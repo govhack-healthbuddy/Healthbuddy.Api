@@ -69,6 +69,7 @@ namespace HealthBuddy.Api.Controllers
                         LessThan4HrsPct = GetLengthOfStay(hosp, lengthsOfStay),
                         EmergencyDepartmentStatus = GetEDStatus(hosp, emergencyStats),
                         Location = GetLocation(hosp),
+                        TwitterSentiment = EventHub.EventService.GetTwitterSentiment(hosp.HospitalCode)
                     }));
             }
             else

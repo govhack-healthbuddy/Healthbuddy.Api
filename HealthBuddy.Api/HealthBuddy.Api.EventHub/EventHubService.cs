@@ -1,10 +1,12 @@
 ﻿using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HealthBuddy.Api.EventHub
@@ -13,34 +15,39 @@ namespace HealthBuddy.Api.EventHub
     {
         static string partitionId = "0";
         static string eventHubName = "dtieventhubfromstream";
-        static string offset =null;
+        static string offset = null;
         const string consumerGroupName = "GovHackStreamConsumerGroup";
         static long receiverEpoch = 0;
 
-        public void Main(string[] args)
-        {
-            ParseArgs(args);
-            MessageProcessingWithReceiveLoop().Wait();
+        static Dictionary<string, int> TwitterSentiment { get; set; }
 
-            Console.WriteLine("Press Ctrl-C to stop the worker process");
-            Console.ReadLine();
+        static Thread WorkerThread;
+
+        public static int? GetTwitterSentiment(string hashtag)
+        {
+            if (TwitterSentiment == null)
+            {
+                TwitterSentiment = new Dictionary<string, int>();
+            }
+
+            if (WorkerThread == null)
+            {
+                StartThread();
+            }
+            Random random = new Random();
+            var entry = TwitterSentiment.Values.ToList().Skip(random.Next(TwitterSentiment.Count)).FirstOrDefault();
+            if (entry != null)
+            {
+                return entry;
+            }
+
+            return null;
         }
 
-        static void ParseArgs(string[] args)
+        private static void StartThread()
         {
-            if (false && args.Length < 2)
-            {
-                throw new ArgumentException("Incorrect number of arguments. Expected Args <eventhubname> <partitionId> <receiverEpoch> [startingoffset]", args.ToString());
-            }
-            else
-            {
-                //eventHubName = args[0];
-                Console.WriteLine("ehnanme: " + eventHubName);
-
-                //partitionId = args[1];
-                Console.WriteLine("partitionId: " + partitionId);
-
-            }
+            WorkerThread = new Thread(new ThreadStart(() => MessageProcessingWithReceiveLoop().Wait()));
+            WorkerThread.Start();
         }
 
         private static async Task MessageProcessingWithReceiveLoop()
@@ -73,6 +80,10 @@ namespace HealthBuddy.Api.EventHub
 
                         Console.WriteLine("Processing: Seq number {0} Offset {1}  Partition {2} EnqueueTimeUtc {3} Message {4}",
                             message.SequenceNumber, message.Offset, message.PartitionKey, message.EnqueuedTimeUtc.ToShortTimeString(), msg);
+
+                        var msgobj = JsonConvert.DeserializeObject<EventHubMessage>(msg);
+
+                        TwitterSentiment[msgobj.topic] = msgobj.sentimentscore;
                     }
                 }
                 catch (Exception exception)
@@ -85,17 +96,17 @@ namespace HealthBuddy.Api.EventHub
 
         private static string GetServiceBusConnectionString()
         {
-            string connectionString = ConfigurationManager.AppSettings["Microsoft.ServiceBus.ConnectionString"];
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                Console.WriteLine("Did not find Service Bus connections string in appsettings (app.config)");
-                return string.Empty;
-            }
+            //string connectionString = ConfigurationManager.AppSettings["Microsoft.ServiceBus.ConnectionString"];
+            //if (string.IsNullOrEmpty(connectionString))
+            //{
+            //    Console.WriteLine("Did not find Service Bus connections string in appsettings (app.config)");
+            //    return string.Empty;
+            //}
             string conn = ServiceBusConnectionStringBuilder.CreateUsingSharedAccessKey(new Uri("sb://dtiservicebus.servicebus.windows.net"), "GovHackStreamReceiveApp", "6pZ1WoK74PBcKZbfAg6RFoynZuX8wMpR7T8YGZAwaZw=");
             //ServiceBusConnectionStringBuilder builder = new ServiceBusConnectionStringBuilder(connectionString);
             //builder.TransportType = TransportType.Amqp;
             return conn;
-        } 
+        }
 
     }
 }
