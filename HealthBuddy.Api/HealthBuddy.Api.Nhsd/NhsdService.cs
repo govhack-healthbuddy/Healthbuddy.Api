@@ -54,7 +54,14 @@ namespace HealthBuddy.Api.Nhsd
             FacilitySearchResult searchResult = new FacilitySearchResult();
             var facilities = result.SiteSearchResponse.SiteSearchResult.ResultList.SiteData.Select(a => new Facility
                 {
-                    Location = new Location { Suburb = a.SiteAddress.Suburb, Postcode = a.SiteAddress.Postcode, Latitude = a.SiteAddress.Latitude, Longitude = a.SiteAddress.Longitude},
+                    Location = new Location
+                    {
+                        Address = a.SiteAddress.Address_Line_1 + " " + a.SiteAddress.Address_Line_2 + " " + a.SiteAddress.Address_Line_3,
+                        Suburb = a.SiteAddress.Suburb,
+                        Postcode = a.SiteAddress.Postcode,
+                        Latitude = a.SiteAddress.Latitude,
+                        Longitude = a.SiteAddress.Longitude
+                    },
                     Name = a.OrganisationName
                 }).ToList();
             return facilities;
