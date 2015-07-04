@@ -25,7 +25,7 @@ namespace HealthBuddy.Api.Models
         public string Description { get; set; }
         public string Sector { get; set; }
         public string Beds { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public Nullable<double> Latitude { get; set; }
+        public Nullable<double> Longitude { get; set; }
     }
 }

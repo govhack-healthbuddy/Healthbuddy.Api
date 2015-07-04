@@ -20,7 +20,7 @@ namespace HealthBuddy.Api.Controllers
         {
             FacilitySearchResult result = new FacilitySearchResult();
 
-            result.Origin =  new Location { Latitude = latitude, Longitude = longitude };
+            result.Origin = new Location { Latitude = latitude, Longitude = longitude };
 
             // Get the suburb and postcode for the origin location
             var google = new HealthBuddy.Api.Directions.DirectionsService();
@@ -31,15 +31,26 @@ namespace HealthBuddy.Api.Controllers
                 var nhsd = new HealthBuddy.Api.Nhsd.NhsdService();
                 result.Facilities.AddRange(nhsd.Search(result.Origin));
             }
-            
+
             if (hospital)
             {
-                var hospitals = db.AllSaHospitals.OrderBy(a => a.POSTCODE).Take(5).ToList();
+                double lat = double.Parse(result.Origin.Latitude);
+                double lng = double.Parse(result.Origin.Longitude);
+
+                var hospitals = db.myhospitals_contact_data.OrderBy(a => (a.Latitude - lat) * (a.Latitude - lat)
+                + (a.Longitude - lng) * (a.Longitude - lng)).Take(5).ToList();
 
                 result.Facilities.AddRange(hospitals.Select(a => new Facility
                     {
-                        Name = a.NAME,
-                        Location = new Location { Address = a.ADDRESS, Suburb = a.SUBURB, Postcode = FormatPostcode(a.POSTCODE) },
+                        Name = a.Hospital_name,
+                        Location = new Location
+                        {
+                            Address = a.Street_address,
+                            Suburb = a.Suburb,
+                            Postcode = a.Postcode,
+                            Latitude = a.Latitude.ToString(),
+                            Longitude = a.Longitude.ToString()
+                        },
                     }));
             }
 
