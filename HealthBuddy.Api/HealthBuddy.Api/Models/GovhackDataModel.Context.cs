@@ -26,5 +26,7 @@ namespace HealthBuddy.Api.Models
         }
     
         public virtual DbSet<Test> Tests { get; set; }
+        public virtual DbSet<AllSaHospital> AllSaHospitals { get; set; }
+        public virtual DbSet<myhospitals_contact_data> myhospitals_contact_data { get; set; }
     }
 }

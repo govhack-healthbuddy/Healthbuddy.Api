@@ -31,11 +31,11 @@ namespace HealthBuddy.Api.Nhsd
                 {"SearchServiceCoverageArea", "false"},
                 {"SearchServiceAddress", "false"},
                 {"orderby", "Distance"},
-                {"endpos", "50"},
+                {"endpos", "5"},
                 {"deliverymethod", "{\"string\":\"Site Visit\"}"},
                 {"callback", "angular.callbacks._4"},
                 {"apikey", "nhccn-9vSRwUZooHY2BebTOvAhA93n"},
-                {"alwaysreturn", "50"}
+                {"alwaysreturn", "5"}
             };
 
             string url = "https://api.nhsd.com.au/nhsd/v2.8/rest/sitesearch?";

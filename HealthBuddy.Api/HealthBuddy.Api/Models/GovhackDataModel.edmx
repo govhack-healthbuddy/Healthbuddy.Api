@@ -4,7 +4,42 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GovhackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GovhackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AllSaHospitals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DHS_ID" Type="int" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="200" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="100" />
+          <Property Name="SUBURB" Type="nvarchar" MaxLength="50" />
+          <Property Name="POSTCODE" Type="int" />
+          <Property Name="SUBTYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="LABEL" Type="nvarchar" MaxLength="100" />
+          <Property Name="DEPT" Type="nvarchar" MaxLength="50" />
+          <Property Name="MET" Type="char" MaxLength="1" />
+          <Property Name="XCORD" Type="nvarchar" MaxLength="11" />
+          <Property Name="YCORD" Type="nvarchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="myhospitals-contact-data">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hospital name" Type="varchar" MaxLength="200" />
+          <Property Name="Phone number" Type="varchar" MaxLength="50" />
+          <Property Name="Street address" Type="varchar" MaxLength="200" />
+          <Property Name="Suburb" Type="varchar" MaxLength="50" />
+          <Property Name="Postcode" Type="varchar" MaxLength="4" />
+          <Property Name="State" Type="varchar" MaxLength="3" />
+          <Property Name="Website" Type="varchar" MaxLength="500" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="Sector" Type="varchar" MaxLength="50" />
+          <Property Name="Beds" Type="varchar" MaxLength="50" />
+          <Property Name="Latitude" Type="varchar" MaxLength="11" />
+          <Property Name="Longitude" Type="varchar" MaxLength="11" />
+        </EntityType>
         <EntityType Name="Test">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,10 +48,11 @@
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="GovhackModelStoreContainer">
+          <EntitySet Name="AllSaHospitals" EntityType="Self.AllSaHospitals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="myhospitals-contact-data" EntityType="Self.myhospitals-contact-data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GovhackModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -29,7 +65,44 @@
         </EntityType>
         <EntityContainer Name="GovhackModelEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Tests" EntityType="Self.Test" />
+          <EntitySet Name="AllSaHospitals" EntityType="GovhackModel.AllSaHospital" />
+          <EntitySet Name="myhospitals_contact_data" EntityType="GovhackModel.myhospitals_contact_data" />
         </EntityContainer>
+        <EntityType Name="AllSaHospital">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DHS_ID" Type="Int32" />
+          <Property Name="NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SUBURB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="POSTCODE" Type="Int32" />
+          <Property Name="SUBTYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LABEL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DEPT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MET" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="XCORD" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="YCORD" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="myhospitals_contact_data">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hospital_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Street_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Suburb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Sector" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Beds" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -41,6 +114,43 @@
               <MappingFragment StoreEntitySet="Test">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllSaHospitals">
+            <EntityTypeMapping TypeName="GovhackModel.AllSaHospital">
+              <MappingFragment StoreEntitySet="AllSaHospitals">
+                <ScalarProperty Name="YCORD" ColumnName="YCORD" />
+                <ScalarProperty Name="XCORD" ColumnName="XCORD" />
+                <ScalarProperty Name="MET" ColumnName="MET" />
+                <ScalarProperty Name="DEPT" ColumnName="DEPT" />
+                <ScalarProperty Name="LABEL" ColumnName="LABEL" />
+                <ScalarProperty Name="SUBTYPE" ColumnName="SUBTYPE" />
+                <ScalarProperty Name="POSTCODE" ColumnName="POSTCODE" />
+                <ScalarProperty Name="SUBURB" ColumnName="SUBURB" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="DHS_ID" ColumnName="DHS_ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="myhospitals_contact_data">
+            <EntityTypeMapping TypeName="GovhackModel.myhospitals_contact_data">
+              <MappingFragment StoreEntitySet="myhospitals-contact-data">
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Beds" ColumnName="Beds" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="Street_address" ColumnName="Street address" />
+                <ScalarProperty Name="Phone_number" ColumnName="Phone number" />
+                <ScalarProperty Name="Hospital_name" ColumnName="Hospital name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

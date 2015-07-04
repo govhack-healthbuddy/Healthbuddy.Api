@@ -93,6 +93,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AllSaHospital.cs">
+      <DependentUpon>GovhackDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GovhackDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,6 +110,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GovhackDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\myhospitals_contact_data.cs">
+      <DependentUpon>GovhackDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Test.cs">
       <DependentUpon>GovhackDataModel.tt</DependentUpon>

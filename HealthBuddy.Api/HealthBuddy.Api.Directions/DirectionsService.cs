@@ -13,7 +13,9 @@ namespace HealthBuddy.Api.Directions
 {
     public class DirectionsService
     {
-        const string apiKey = "AIzaSyDIwRxZ2MUNnakY3_YQmW0XGua0_HncBt0";
+        //const string apiKey = "AIzaSyDIwRxZ2MUNnakY3_YQmW0XGua0_HncBt0";
+        const string apiKey = "AIzaSyAjqWnOnzbYAuGKfRUKA3DWW1abQbKV_0Q";
+
         const string URL = "https://maps.googleapis.com/maps/api/directions/json?";
 
         static void Main(string[] args)
@@ -48,7 +50,7 @@ namespace HealthBuddy.Api.Directions
 
         private void GetTravelTimeForMode(Location origin, Location destination, List<TravelTime> list, TravelMode mode)
         {
-            var time = this.GetTravelTime(StringForm(origin), StringForm(destination), mode);
+            var time = this.GetTravelTime(origin, destination, mode);
             if (time.HasValue)
             {
                 list.Add(
@@ -63,13 +65,15 @@ namespace HealthBuddy.Api.Directions
             }
         }
 
-        public TimeSpan? GetTravelTime(string origin, string destination, TravelMode mode)
+        public TimeSpan? GetTravelTime(Location origin, Location destination, TravelMode mode)
         {
+            string originString = StringForm(origin);
+            string destinationString = StringForm(destination);
             var request = new DirectionsRequest()
             {
                 ApiKey = apiKey,
-                Origin = origin,
-                Destination = destination,
+                Origin = originString,
+                Destination = destinationString,
                 TravelMode = mode,
                 DepartureTime = DateTime.Now,
             };
@@ -79,17 +83,22 @@ namespace HealthBuddy.Api.Directions
             var route = response.Routes.FirstOrDefault();
             if (route != null)
             {
+                // For routes that contain no waypoints, the route will consist of a single "leg".
                 var leg = route.Legs.FirstOrDefault();
                 if (leg != null)
                 {
+                    // Get the origin and destination's lat/long if not yet known.
+                    origin.Latitude = origin.Latitude ?? leg.StartLocation.Latitude.ToString();
+                    origin.Longitude = origin.Longitude ?? leg.StartLocation.Longitude.ToString();
+
+                    destination.Latitude = destination.Latitude ?? leg.EndLocation.Latitude.ToString();
+                    destination.Longitude = destination.Longitude ?? leg.EndLocation.Longitude.ToString();
+
                     return leg.Duration.Value;
                 }
             }
             return null;
         }
-
-
-
 
         static object GetDirections2(string origin, string destination)
         {
