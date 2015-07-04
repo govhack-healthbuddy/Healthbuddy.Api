@@ -16,5 +16,7 @@ namespace HealthBuddy.Api.Model
         public object Description { get; set; }
 
         public double? LessThan4HrsPct { get; set; }
+
+        public EmergencyDepartmentStatus EmergencyDepartmentStatus { get; set; }
     }
 }

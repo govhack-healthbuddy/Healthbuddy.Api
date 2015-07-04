@@ -12,21 +12,16 @@ namespace HealthBuddy.Api.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class myhospitals_contact_data
+    public partial class ED001_HospitalStatus
     {
         public int Id { get; set; }
-        public string Hospital_name { get; set; }
-        public string Phone_number { get; set; }
-        public string Street_address { get; set; }
-        public string Suburb { get; set; }
-        public string Postcode { get; set; }
-        public string State { get; set; }
-        public string Website { get; set; }
-        public string Description { get; set; }
-        public string Sector { get; set; }
-        public string Beds { get; set; }
-        public Nullable<double> Latitude { get; set; }
-        public Nullable<double> Longitude { get; set; }
+        public Nullable<System.DateTime> LastUpdated { get; set; }
         public string HospitalCode { get; set; }
+        public Nullable<long> ExpectedArrivals { get; set; }
+        public Nullable<long> EdWaiting { get; set; }
+        public Nullable<long> EdCommenced { get; set; }
+        public Nullable<long> Capacity { get; set; }
+        public string EdCurrentStatus { get; set; }
+        public Nullable<decimal> AvgWaitTimeMinsExclHigh { get; set; }
     }
 }

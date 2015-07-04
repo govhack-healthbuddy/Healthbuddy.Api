@@ -16,7 +16,7 @@ namespace HealthBuddy.Api.Controllers
         public object Get(string suburb, string postcode)
         {
             var svc = new HealthBuddy.Api.Nhsd.NhsdService();
-            var result = svc.Search(new Location { Suburb = suburb, Postcode = postcode });
+            var result = svc.Search(new Location { Suburb = suburb, Postcode = postcode }, FacilityType.GP);
             return result;
         }
 

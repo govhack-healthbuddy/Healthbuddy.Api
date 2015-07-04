@@ -22,6 +22,20 @@
           <Property Name="XCORD" Type="nvarchar" MaxLength="11" />
           <Property Name="YCORD" Type="nvarchar" MaxLength="11" />
         </EntityType>
+        <EntityType Name="ED001_HospitalStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="HospitalCode" Type="varchar" MaxLength="10" />
+          <Property Name="ExpectedArrivals" Type="bigint" />
+          <Property Name="EdWaiting" Type="bigint" />
+          <Property Name="EdCommenced" Type="bigint" />
+          <Property Name="Capacity" Type="bigint" />
+          <Property Name="EdCurrentStatus" Type="varchar" MaxLength="5" />
+          <Property Name="AvgWaitTimeMinsExclHigh" Type="numeric" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="emergencydept4hourlengthofstaymetadata">
           <Key>
             <PropertyRef Name="ID" />
@@ -51,6 +65,7 @@
           <Property Name="Beds" Type="varchar" MaxLength="50" />
           <Property Name="Latitude" Type="float" />
           <Property Name="Longitude" Type="float" />
+          <Property Name="HospitalCode" Type="varchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -61,6 +76,7 @@
         </EntityType>
         <EntityContainer Name="GovhackModelStoreContainer">
           <EntitySet Name="AllSaHospitals" EntityType="Self.AllSaHospitals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ED001_HospitalStatus" EntityType="Self.ED001_HospitalStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="emergencydept4hourlengthofstaymetadata" EntityType="Self.emergencydept4hourlengthofstaymetadata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="myhospitals-contact-data" EntityType="Self.myhospitals-contact-data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
@@ -81,6 +97,7 @@
           <EntitySet Name="AllSaHospitals" EntityType="GovhackModel.AllSaHospital" />
           <EntitySet Name="myhospitals_contact_data" EntityType="GovhackModel.myhospitals_contact_data" />
           <EntitySet Name="emergencydept4hourlengthofstaymetadata" EntityType="GovhackModel.emergencydept4hourlengthofstaymetadata" />
+          <EntitySet Name="ED001_HospitalStatus" EntityType="GovhackModel.ED001_HospitalStatus" />
         </EntityContainer>
         <EntityType Name="AllSaHospital">
           <Key>
@@ -116,6 +133,7 @@
           <Property Name="Beds" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Latitude" Type="Double" />
           <Property Name="Longitude" Type="Double" />
+          <Property Name="HospitalCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="emergencydept4hourlengthofstaymetadata">
           <Key>
@@ -128,6 +146,20 @@
           <Property Name="LessThan4HrsPct" Type="Decimal" Precision="10" Scale="5" />
           <Property Name="Year" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="MyHospitalsId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ED001_HospitalStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="HospitalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ExpectedArrivals" Type="Int64" />
+          <Property Name="EdWaiting" Type="Int64" />
+          <Property Name="EdCommenced" Type="Int64" />
+          <Property Name="Capacity" Type="Int64" />
+          <Property Name="EdCurrentStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="AvgWaitTimeMinsExclHigh" Type="Decimal" Precision="10" Scale="2" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -164,6 +196,7 @@
           <EntitySetMapping Name="myhospitals_contact_data">
             <EntityTypeMapping TypeName="GovhackModel.myhospitals_contact_data">
               <MappingFragment StoreEntitySet="myhospitals-contact-data">
+                <ScalarProperty Name="HospitalCode" ColumnName="HospitalCode" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="Beds" ColumnName="Beds" />
@@ -190,6 +223,21 @@
                 <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
                 <ScalarProperty Name="Quarter" ColumnName="Quarter" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ED001_HospitalStatus">
+            <EntityTypeMapping TypeName="GovhackModel.ED001_HospitalStatus">
+              <MappingFragment StoreEntitySet="ED001_HospitalStatus">
+                <ScalarProperty Name="AvgWaitTimeMinsExclHigh" ColumnName="AvgWaitTimeMinsExclHigh" />
+                <ScalarProperty Name="EdCurrentStatus" ColumnName="EdCurrentStatus" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="EdCommenced" ColumnName="EdCommenced" />
+                <ScalarProperty Name="EdWaiting" ColumnName="EdWaiting" />
+                <ScalarProperty Name="ExpectedArrivals" ColumnName="ExpectedArrivals" />
+                <ScalarProperty Name="HospitalCode" ColumnName="HospitalCode" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

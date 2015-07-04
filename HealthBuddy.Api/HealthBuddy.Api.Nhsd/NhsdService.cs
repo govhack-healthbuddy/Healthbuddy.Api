@@ -15,18 +15,31 @@ namespace HealthBuddy.Api.Nhsd
         static void Main(string[] args)
         {
             var svc = new NhsdService();
-            var result = svc.Search(new Location { Suburb = "Adelaide", Postcode = "5000" });
+            var result = svc.Search(new Location { Suburb = "Adelaide", Postcode = "5000" }, FacilityType.GP);
         }
 
-        public List<Facility> Search(Location loc)
+        public List<Facility> Search(Location loc, FacilityType type)
         {
+
+            string serviceCategory = null;
+            string servicetype = null;
+            switch (type)
+            {
+                case FacilityType.GP:
+                    serviceCategory = "General Practice/GP (doctor)";
+                    break;
+                case FacilityType.Pharmacy:
+                    servicetype = "Pharmacy";
+                    break;
+            }
 
             var requestDic = new Dictionary<string, string>
             {
                 {"usepostcoderadialsearch", "true"},
                 {"suburbpostcodedata", JsonConvert.SerializeObject(new { SiteSearchSuburbPostcodeParams = new { SuburbPostcode = loc.Suburb + " " + loc.Postcode, SearchSurroundingSuburbs = true } })},
                 {"startpos", "1"},
-                {"servicecategory", "General Practice/GP (doctor)"},
+                {"servicetype", servicetype},
+                {"ServiceCategory", serviceCategory},
                 {"SearchSiteAddress", "true"},
                 {"SearchServiceCoverageArea", "false"},
                 {"SearchServiceAddress", "false"},
@@ -41,7 +54,10 @@ namespace HealthBuddy.Api.Nhsd
             string url = "https://api.nhsd.com.au/nhsd/v2.8/rest/sitesearch?";
             foreach (var entry in requestDic)
             {
-                url += entry.Key + "=" + Uri.EscapeDataString(entry.Value) + "&";
+                if (entry.Value != null)
+                {
+                    url += entry.Key + "=" + Uri.EscapeDataString(entry.Value) + "&";
+                }
             }
 
             WebRequest req = WebRequest.Create(url);

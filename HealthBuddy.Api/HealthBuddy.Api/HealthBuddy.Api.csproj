@@ -96,6 +96,9 @@
     <Compile Include="Models\AllSaHospital.cs">
       <DependentUpon>GovhackDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ED001_HospitalStatus.cs">
+      <DependentUpon>GovhackDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\emergencydept4hourlengthofstaymetadata.cs">
       <DependentUpon>GovhackDataModel.tt</DependentUpon>
     </Compile>
