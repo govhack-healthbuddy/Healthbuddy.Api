@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthBuddy.Api.Model
 {
-    public class Travel
+    public class TravelTime
     {
         public string Mode { get; set; }
         public int Days { get; set; }

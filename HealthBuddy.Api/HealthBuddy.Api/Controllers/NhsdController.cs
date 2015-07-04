@@ -1,4 +1,5 @@
 ﻿using HealthBuddy.Api.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,14 @@ using System.Web.Http;
 
 namespace HealthBuddy.Api.Controllers
 {
-    public class TravelController : ApiController
+    public class NhsdController : ApiController
     {
         // GET: api/Main/Origin
-        public List<TravelTime> Get(string origin, string destination)
+        public object Get(string suburb, string postcode)
         {
-            var svc = new HealthBuddy.Api.Directions.DirectionsService();
-            var times = svc.GetTravelTimes(new Location { Suburb = origin }, new Location { Suburb = destination });
-            return times;
+            var svc = new HealthBuddy.Api.Nhsd.NhsdService();
+            var result = svc.Search(new Location { Suburb = suburb, Postcode = postcode });
+            return result;
         }
 
         // POST: api/Main

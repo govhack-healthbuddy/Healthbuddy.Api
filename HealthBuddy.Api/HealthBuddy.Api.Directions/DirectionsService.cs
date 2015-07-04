@@ -19,7 +19,9 @@ namespace HealthBuddy.Api.Directions
         static void Main(string[] args)
         {
             DirectionsService ds = new DirectionsService();
-            var result = ds.GetTravelTime("sydney, australia", "melbourne, australia");
+            Location origin = new Location { Suburb = "Sydney" };
+            Location destination = new Location { Suburb = "Melbourne" };
+            var result = ds.GetTravelTimes(origin, destination);
             foreach (var entry in result)
             {
                 Console.WriteLine("{0}: {1}", entry.Mode, entry.Minutes);
@@ -27,26 +29,38 @@ namespace HealthBuddy.Api.Directions
             Console.ReadLine();
         }
 
-        public List<Travel> GetTravelTime(string origin, string destination)
+        private string StringForm(Location loc)
         {
-            var list = new List<Travel>();
-            foreach (TravelMode mode in Enum.GetValues(typeof(TravelMode)))
+            if (!string.IsNullOrEmpty(loc.Latitude) && !string.IsNullOrEmpty(loc.Longitude))
             {
-                var time = this.GetTravelTime(origin, destination, mode);
-                if (time.HasValue)
-                {
-                    list.Add(
-                        new Travel
-                        {
-                            Mode = mode.ToString(),
-                            Days = time.Value.Days,
-                            Hours = time.Value.Hours,
-                            Minutes = time.Value.Minutes,
-                            Seconds = time.Value.Seconds
-                        });
-                }
+                return loc.Latitude + "," + loc.Longitude;
             }
+            return loc.Suburb + " " + loc.Postcode + " Australia";
+        }
+
+        public List<TravelTime> GetTravelTimes(Location origin, Location destination)
+        {
+            var list = new List<TravelTime>();
+            GetTravelTimeForMode(origin, destination, list, TravelMode.Driving);
+            GetTravelTimeForMode(origin, destination, list, TravelMode.Transit);
             return list;
+        }
+
+        private void GetTravelTimeForMode(Location origin, Location destination, List<TravelTime> list, TravelMode mode)
+        {
+            var time = this.GetTravelTime(StringForm(origin), StringForm(destination), mode);
+            if (time.HasValue)
+            {
+                list.Add(
+                    new TravelTime
+                    {
+                        Mode = mode.ToString(),
+                        Days = time.Value.Days,
+                        Hours = time.Value.Hours,
+                        Minutes = time.Value.Minutes,
+                        Seconds = time.Value.Seconds
+                    });
+            }
         }
 
         public TimeSpan? GetTravelTime(string origin, string destination, TravelMode mode)
@@ -89,6 +103,33 @@ namespace HealthBuddy.Api.Directions
             StreamReader sr = new StreamReader(response.GetResponseStream());
             return JsonConvert.DeserializeObject(sr.ReadToEnd());
 
+        }
+
+        public void Lookup(Location loc)
+        {
+            var request = new GoogleMapsApi.Entities.Geocoding.Request.GeocodingRequest
+            {
+                Location = new GoogleMapsApi.Entities.Common.Location(double.Parse(loc.Latitude), double.Parse(loc.Longitude)),
+                ApiKey = apiKey
+            };
+
+            var response = GoogleMapsApi.GoogleMaps.Geocode.Query(request);
+
+            var result = response.Results.FirstOrDefault();
+            if (result != null)
+            {
+                var suburb = result.AddressComponents.FirstOrDefault(a => a.Types.Contains("locality"));
+                if (suburb != null)
+                {
+                    loc.Suburb = suburb.LongName;
+                }
+
+                var postcode = result.AddressComponents.FirstOrDefault(a => a.Types.Contains("postal_code"));
+                if (postcode != null)
+                {
+                    loc.Postcode = postcode.LongName;
+                }
+            }
         }
     }
 }

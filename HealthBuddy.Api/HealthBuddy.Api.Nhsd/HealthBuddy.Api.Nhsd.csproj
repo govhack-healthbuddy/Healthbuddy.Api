@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3315AC2C-2ABE-4B2A-9610-DCDC7AC32AA2}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{F2D94374-DC73-4B85-8529-32846ADC88B7}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HealthBuddy.Api.Model</RootNamespace>
-    <AssemblyName>HealthBuddy.Api.Model</AssemblyName>
+    <RootNamespace>HealthBuddy.Api.Nhsd</RootNamespace>
+    <AssemblyName>HealthBuddy.Api.Nhsd</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,14 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Facility.cs" />
-    <Compile Include="Location.cs" />
-    <Compile Include="FacilitySearchResult.cs" />
-    <Compile Include="TravelTime.cs" />
+    <Compile Include="NhsdService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RootObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HealthBuddy.Api.Model\HealthBuddy.Api.Model.csproj">
+      <Project>{3315ac2c-2abe-4b2a-9610-dcdc7ac32aa2}</Project>
+      <Name>HealthBuddy.Api.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

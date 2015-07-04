@@ -85,6 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\NhsdController.cs" />
+    <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\TravelController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\TestsController.cs" />
@@ -155,6 +157,10 @@
     <ProjectReference Include="..\HealthBuddy.Api.Model\HealthBuddy.Api.Model.csproj">
       <Project>{3315ac2c-2abe-4b2a-9610-dcdc7ac32aa2}</Project>
       <Name>HealthBuddy.Api.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HealthBuddy.Api.Nhsd\HealthBuddy.Api.Nhsd.csproj">
+      <Project>{f2d94374-dc73-4b85-8529-32846adc88b7}</Project>
+      <Name>HealthBuddy.Api.Nhsd</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

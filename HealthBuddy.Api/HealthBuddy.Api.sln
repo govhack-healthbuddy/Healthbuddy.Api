@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuddy.Api.Directions"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuddy.Api.Model", "HealthBuddy.Api.Model\HealthBuddy.Api.Model.csproj", "{3315AC2C-2ABE-4B2A-9610-DCDC7AC32AA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuddy.Api.Nhsd", "HealthBuddy.Api.Nhsd\HealthBuddy.Api.Nhsd.csproj", "{F2D94374-DC73-4B85-8529-32846ADC88B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3315AC2C-2ABE-4B2A-9610-DCDC7AC32AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3315AC2C-2ABE-4B2A-9610-DCDC7AC32AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3315AC2C-2ABE-4B2A-9610-DCDC7AC32AA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D94374-DC73-4B85-8529-32846ADC88B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D94374-DC73-4B85-8529-32846ADC88B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D94374-DC73-4B85-8529-32846ADC88B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D94374-DC73-4B85-8529-32846ADC88B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
