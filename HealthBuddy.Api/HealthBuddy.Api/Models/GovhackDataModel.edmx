@@ -22,6 +22,18 @@
           <Property Name="XCORD" Type="nvarchar" MaxLength="11" />
           <Property Name="YCORD" Type="nvarchar" MaxLength="11" />
         </EntityType>
+        <EntityType Name="emergencydept4hourlengthofstaymetadata">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quarter" Type="varchar" MaxLength="50" />
+          <Property Name="HospitalID" Type="varchar" MaxLength="10" />
+          <Property Name="HospitalName" Type="varchar" MaxLength="50" />
+          <Property Name="LessThan4HrsPct" Type="decimal" Precision="10" Scale="5" />
+          <Property Name="Year" Type="varchar" MaxLength="7" />
+          <Property Name="MyHospitalsId" Type="int" />
+        </EntityType>
         <EntityType Name="myhospitals-contact-data">
           <Key>
             <PropertyRef Name="Id" />
@@ -49,6 +61,7 @@
         </EntityType>
         <EntityContainer Name="GovhackModelStoreContainer">
           <EntitySet Name="AllSaHospitals" EntityType="Self.AllSaHospitals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="emergencydept4hourlengthofstaymetadata" EntityType="Self.emergencydept4hourlengthofstaymetadata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="myhospitals-contact-data" EntityType="Self.myhospitals-contact-data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -67,6 +80,7 @@
           <EntitySet Name="Tests" EntityType="Self.Test" />
           <EntitySet Name="AllSaHospitals" EntityType="GovhackModel.AllSaHospital" />
           <EntitySet Name="myhospitals_contact_data" EntityType="GovhackModel.myhospitals_contact_data" />
+          <EntitySet Name="emergencydept4hourlengthofstaymetadata" EntityType="GovhackModel.emergencydept4hourlengthofstaymetadata" />
         </EntityContainer>
         <EntityType Name="AllSaHospital">
           <Key>
@@ -102,6 +116,18 @@
           <Property Name="Beds" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Latitude" Type="Double" />
           <Property Name="Longitude" Type="Double" />
+        </EntityType>
+        <EntityType Name="emergencydept4hourlengthofstaymetadata">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quarter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HospitalID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="HospitalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LessThan4HrsPct" Type="Decimal" Precision="10" Scale="5" />
+          <Property Name="Year" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="MyHospitalsId" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -151,6 +177,19 @@
                 <ScalarProperty Name="Phone_number" ColumnName="Phone number" />
                 <ScalarProperty Name="Hospital_name" ColumnName="Hospital name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="emergencydept4hourlengthofstaymetadata">
+            <EntityTypeMapping TypeName="GovhackModel.emergencydept4hourlengthofstaymetadata">
+              <MappingFragment StoreEntitySet="emergencydept4hourlengthofstaymetadata">
+                <ScalarProperty Name="MyHospitalsId" ColumnName="MyHospitalsId" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="LessThan4HrsPct" ColumnName="LessThan4HrsPct" />
+                <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

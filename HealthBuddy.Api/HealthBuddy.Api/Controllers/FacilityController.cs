@@ -40,9 +40,14 @@ namespace HealthBuddy.Api.Controllers
                 var hospitals = db.myhospitals_contact_data.OrderBy(a => (a.Latitude - lat) * (a.Latitude - lat)
                 + (a.Longitude - lng) * (a.Longitude - lng)).Take(5).ToList();
 
+                var ids = hospitals.Select(a => a.Id).ToArray();
+                var lengthsOfStay = db.emergencydept4hourlengthofstaymetadata.Where(a => ids.Contains(a.MyHospitalsId.Value)).OrderBy(a => a.ID).ToList();
+
+
                 result.Facilities.AddRange(hospitals.Select(a => new Facility
                     {
                         Name = a.Hospital_name,
+                        LessThan4HrsPct = GetLengthOfStay(a, lengthsOfStay),
                         Location = new Location
                         {
                             Address = a.Street_address,
@@ -61,6 +66,23 @@ namespace HealthBuddy.Api.Controllers
             }
             return result;
         }
+
+        /// <summary>
+        /// Gets the last LengthOfStay entry for the hospital. The last entry is the most recent quarter for which data is available.
+        /// </summary>
+        /// <param name="hospital"></param>
+        /// <param name="lengthsOfStay"></param>
+        /// <returns></returns>
+        private double? GetLengthOfStay(myhospitals_contact_data hospital, List<emergencydept4hourlengthofstaymetadata> lengthsOfStay)
+        {
+            var los = lengthsOfStay.LastOrDefault(a => a.MyHospitalsId == hospital.Id);
+            if (los != null && los.LessThan4HrsPct.HasValue)
+            {
+                return (double)los.LessThan4HrsPct.Value;
+            }
+            return null;
+        }
+
 
         private string FormatPostcode(int? nullable)
         {

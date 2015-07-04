@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="GovhackModel.Test" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GovhackModel.AllSaHospital" Width="1.5" PointX="3.75" PointY="0.75" />
         <EntityTypeShape EntityType="GovhackModel.myhospitals_contact_data" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="GovhackModel.emergencydept4hourlengthofstaymetadata" Width="1.5" PointX="3.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
