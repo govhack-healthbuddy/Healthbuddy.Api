@@ -39,7 +39,7 @@ namespace HealthBuddy.Api.Controllers
                 result.Facilities.AddRange(hospitals.Select(a => new Facility
                     {
                         Name = a.NAME,
-                        Location = new Location {  Suburb = a.SUBURB, Postcode = FormatPostcode(a.POSTCODE) },
+                        Location = new Location { Address = a.ADDRESS, Suburb = a.SUBURB, Postcode = FormatPostcode(a.POSTCODE) },
                     }));
             }
 

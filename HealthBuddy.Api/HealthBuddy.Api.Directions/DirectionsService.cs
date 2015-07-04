@@ -1,4 +1,5 @@
 ﻿using GoogleMapsApi.Entities.Directions.Request;
+using GoogleMapsApi.Entities.Geocoding.Response;
 using HealthBuddy.Api.Model;
 using Newtonsoft.Json;
 using System;
@@ -37,7 +38,7 @@ namespace HealthBuddy.Api.Directions
             {
                 return loc.Latitude + "," + loc.Longitude;
             }
-            return loc.Suburb + " " + loc.Postcode + " Australia";
+            return loc.Address + " " + loc.Suburb + " " + loc.Postcode + " Australia";
         }
 
         public List<TravelTime> GetTravelTimes(Location origin, Location destination)
@@ -127,18 +128,21 @@ namespace HealthBuddy.Api.Directions
             var result = response.Results.FirstOrDefault();
             if (result != null)
             {
-                var suburb = result.AddressComponents.FirstOrDefault(a => a.Types.Contains("locality"));
-                if (suburb != null)
-                {
-                    loc.Suburb = suburb.LongName;
-                }
-
-                var postcode = result.AddressComponents.FirstOrDefault(a => a.Types.Contains("postal_code"));
-                if (postcode != null)
-                {
-                    loc.Postcode = postcode.LongName;
-                }
+                loc.Suburb = AddressComponent(result, "locality");
+                loc.Postcode = AddressComponent(result, "postal_code");
+                loc.Address = AddressComponent(result, "street_number");
+                loc.Address += " " + AddressComponent(result, "route");
             }
+        }
+
+        private string AddressComponent(Result result, string componentName)
+        {
+            var component = result.AddressComponents.FirstOrDefault(a => a.Types.Contains(componentName));
+            if (component != null)
+            {
+                return component.LongName;
+            }
+            return null;
         }
     }
 }
