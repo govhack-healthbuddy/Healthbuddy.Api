@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\TravelController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -95,6 +96,20 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HealthBuddy.Api.Directions\HealthBuddy.Api.Directions.csproj">
+      <Project>{3d64d9e7-ea99-4893-98a5-79d9a806584e}</Project>
+      <Name>HealthBuddy.Api.Directions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HealthBuddy.Api.EventHub\HealthBuddy.Api.EventHub.csproj">
+      <Project>{cf6f3b87-1b25-40dd-b037-44e9f184dc1d}</Project>
+      <Name>HealthBuddy.Api.EventHub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HealthBuddy.Api.Model\HealthBuddy.Api.Model.csproj">
+      <Project>{3315ac2c-2abe-4b2a-9610-dcdc7ac32aa2}</Project>
+      <Name>HealthBuddy.Api.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -21,6 +21,12 @@ namespace HealthBuddy.Api
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Routes.MapHttpRoute(
+                name: "Travel",
+                routeTemplate: "api/Travel/{origin}/{destination}",
+                defaults: new { controller = "Travel" }
+            );
+
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
         }
     }
