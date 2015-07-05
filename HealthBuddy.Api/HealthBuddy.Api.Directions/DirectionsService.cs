@@ -15,7 +15,8 @@ namespace HealthBuddy.Api.Directions
     public class DirectionsService
     {
         //const string apiKey = "AIzaSyDIwRxZ2MUNnakY3_YQmW0XGua0_HncBt0";
-        const string apiKey = "AIzaSyAjqWnOnzbYAuGKfRUKA3DWW1abQbKV_0Q";
+        //const string apiKey = "AIzaSyAjqWnOnzbYAuGKfRUKA3DWW1abQbKV_0Q";
+        const string apiKey = "AIzaSyBj81wVkaYb8KQdzSh4gCSZ7rz1h909llk";
 
         const string URL = "https://maps.googleapis.com/maps/api/directions/json?";
 
