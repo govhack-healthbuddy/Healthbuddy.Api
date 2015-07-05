@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\TaxiController.cs" />
     <Compile Include="Controllers\NhsdController.cs" />
     <Compile Include="Controllers\FacilityController.cs" />
     <Compile Include="Controllers\TravelController.cs" />
@@ -118,6 +119,9 @@
       <DependentUpon>GovhackDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\myhospitals_contact_data.cs">
+      <DependentUpon>GovhackDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SaCommunityServiceDirectory.cs">
       <DependentUpon>GovhackDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Test.cs">

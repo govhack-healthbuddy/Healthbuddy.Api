@@ -71,6 +71,43 @@
           <Property Name="Gender" Type="varchar" MaxLength="1" />
           <Property Name="Emergency" Type="bit" />
         </EntityType>
+        <EntityType Name="SaCommunityServiceDirectory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Organization Name" Type="nvarchar" MaxLength="110" />
+          <Property Name="Street Address" Type="nvarchar" MaxLength="72" />
+          <Property Name="Supplemental Address 1" Type="nvarchar" MaxLength="500" />
+          <Property Name="Supplemental Address 2" Type="nvarchar" MaxLength="500" />
+          <Property Name="City" Type="nvarchar" MaxLength="44" />
+          <Property Name="Postal Code" Type="int" />
+          <Property Name="StreetAddress-State" Type="nvarchar" MaxLength="26" />
+          <Property Name="PostalAddress-Street Address" Type="nvarchar" MaxLength="109" />
+          <Property Name="PostalAddress-Supplemental Address 1" Type="nvarchar" MaxLength="500" />
+          <Property Name="PostalAddress-Supplemental Address 2" Type="nvarchar" MaxLength="500" />
+          <Property Name="PostalAddress-City" Type="nvarchar" MaxLength="37" />
+          <Property Name="PostalAddress-Postal Code" Type="int" />
+          <Property Name="PostalAddress-State" Type="nvarchar" MaxLength="27" />
+          <Property Name="Phone #1" Type="nvarchar" MaxLength="34" />
+          <Property Name="Phone #2" Type="nvarchar" MaxLength="38" />
+          <Property Name="Mobile #1" Type="nvarchar" MaxLength="33" />
+          <Property Name="Mobile #2" Type="nvarchar" MaxLength="14" />
+          <Property Name="Mobile #2 Comment" Type="nvarchar" MaxLength="34" />
+          <Property Name="Fax #1" Type="nvarchar" MaxLength="36" />
+          <Property Name="Email" Type="nvarchar" MaxLength="73" />
+          <Property Name="Website" Type="nvarchar" MaxLength="306" />
+          <Property Name="Parent Body" Type="nvarchar" MaxLength="289" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Hours" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Meetings" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Eligibility" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Services" Type="nvarchar" MaxLength="2000" />
+          <Property Name="ABN" Type="nvarchar" MaxLength="910" />
+          <Property Name="Last updated" Type="date" />
+          <Property Name="Internal Contact ID" Type="bigint" />
+        </EntityType>
         <EntityType Name="Test">
           <Key>
             <PropertyRef Name="Id" />
@@ -83,6 +120,7 @@
           <EntitySet Name="ED001_HospitalStatus" EntityType="Self.ED001_HospitalStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="emergencydept4hourlengthofstaymetadata" EntityType="Self.emergencydept4hourlengthofstaymetadata" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="myhospitals-contact-data" EntityType="Self.myhospitals-contact-data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaCommunityServiceDirectory" EntityType="Self.SaCommunityServiceDirectory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -102,6 +140,7 @@
           <EntitySet Name="myhospitals_contact_data" EntityType="GovhackModel.myhospitals_contact_data" />
           <EntitySet Name="emergencydept4hourlengthofstaymetadata" EntityType="GovhackModel.emergencydept4hourlengthofstaymetadata" />
           <EntitySet Name="ED001_HospitalStatus" EntityType="GovhackModel.ED001_HospitalStatus" />
+          <EntitySet Name="SaCommunityServiceDirectories" EntityType="GovhackModel.SaCommunityServiceDirectory" />
         </EntityContainer>
         <EntityType Name="AllSaHospital">
           <Key>
@@ -168,6 +207,43 @@
           <Property Name="Capacity" Type="Int64" />
           <Property Name="EdCurrentStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="AvgWaitTimeMinsExclHigh" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="SaCommunityServiceDirectory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Organization_Name" Type="String" MaxLength="110" FixedLength="false" Unicode="true" />
+          <Property Name="Street_Address" Type="String" MaxLength="72" FixedLength="false" Unicode="true" />
+          <Property Name="Supplemental_Address_1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Supplemental_Address_2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="44" FixedLength="false" Unicode="true" />
+          <Property Name="Postal_Code" Type="Int32" />
+          <Property Name="StreetAddress_State" Type="String" MaxLength="26" FixedLength="false" Unicode="true" />
+          <Property Name="PostalAddress_Street_Address" Type="String" MaxLength="109" FixedLength="false" Unicode="true" />
+          <Property Name="PostalAddress_Supplemental_Address_1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PostalAddress_Supplemental_Address_2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PostalAddress_City" Type="String" MaxLength="37" FixedLength="false" Unicode="true" />
+          <Property Name="PostalAddress_Postal_Code" Type="Int32" />
+          <Property Name="PostalAddress_State" Type="String" MaxLength="27" FixedLength="false" Unicode="true" />
+          <Property Name="Phone__1" Type="String" MaxLength="34" FixedLength="false" Unicode="true" />
+          <Property Name="Phone__2" Type="String" MaxLength="38" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile__1" Type="String" MaxLength="33" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile__2" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile__2_Comment" Type="String" MaxLength="34" FixedLength="false" Unicode="true" />
+          <Property Name="Fax__1" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="73" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="306" FixedLength="false" Unicode="true" />
+          <Property Name="Parent_Body" Type="String" MaxLength="289" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Hours" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Meetings" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Eligibility" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Services" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="ABN" Type="String" MaxLength="910" FixedLength="false" Unicode="true" />
+          <Property Name="Last_updated" Type="DateTime" Precision="0" />
+          <Property Name="Internal_Contact_ID" Type="Int64" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -249,6 +325,44 @@
                 <ScalarProperty Name="ExpectedArrivals" ColumnName="ExpectedArrivals" />
                 <ScalarProperty Name="HospitalCode" ColumnName="HospitalCode" />
                 <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaCommunityServiceDirectories">
+            <EntityTypeMapping TypeName="GovhackModel.SaCommunityServiceDirectory">
+              <MappingFragment StoreEntitySet="SaCommunityServiceDirectory">
+                <ScalarProperty Name="Internal_Contact_ID" ColumnName="Internal Contact ID" />
+                <ScalarProperty Name="Last_updated" ColumnName="Last updated" />
+                <ScalarProperty Name="ABN" ColumnName="ABN" />
+                <ScalarProperty Name="Services" ColumnName="Services" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Eligibility" ColumnName="Eligibility" />
+                <ScalarProperty Name="Meetings" ColumnName="Meetings" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Parent_Body" ColumnName="Parent Body" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fax__1" ColumnName="Fax #1" />
+                <ScalarProperty Name="Mobile__2_Comment" ColumnName="Mobile #2 Comment" />
+                <ScalarProperty Name="Mobile__2" ColumnName="Mobile #2" />
+                <ScalarProperty Name="Mobile__1" ColumnName="Mobile #1" />
+                <ScalarProperty Name="Phone__2" ColumnName="Phone #2" />
+                <ScalarProperty Name="Phone__1" ColumnName="Phone #1" />
+                <ScalarProperty Name="PostalAddress_State" ColumnName="PostalAddress-State" />
+                <ScalarProperty Name="PostalAddress_Postal_Code" ColumnName="PostalAddress-Postal Code" />
+                <ScalarProperty Name="PostalAddress_City" ColumnName="PostalAddress-City" />
+                <ScalarProperty Name="PostalAddress_Supplemental_Address_2" ColumnName="PostalAddress-Supplemental Address 2" />
+                <ScalarProperty Name="PostalAddress_Supplemental_Address_1" ColumnName="PostalAddress-Supplemental Address 1" />
+                <ScalarProperty Name="PostalAddress_Street_Address" ColumnName="PostalAddress-Street Address" />
+                <ScalarProperty Name="StreetAddress_State" ColumnName="StreetAddress-State" />
+                <ScalarProperty Name="Postal_Code" ColumnName="Postal Code" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Supplemental_Address_2" ColumnName="Supplemental Address 2" />
+                <ScalarProperty Name="Supplemental_Address_1" ColumnName="Supplemental Address 1" />
+                <ScalarProperty Name="Street_Address" ColumnName="Street Address" />
+                <ScalarProperty Name="Organization_Name" ColumnName="Organization Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

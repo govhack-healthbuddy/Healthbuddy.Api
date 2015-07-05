@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="GovhackModel.myhospitals_contact_data" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="GovhackModel.emergencydept4hourlengthofstaymetadata" Width="1.5" PointX="3.375" PointY="5.75" />
         <EntityTypeShape EntityType="GovhackModel.ED001_HospitalStatus" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="GovhackModel.SaCommunityServiceDirectory" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TaxiService.cs" />
+    <Compile Include="TaxiResult.cs" />
     <Compile Include="FacilityType.cs" />
     <Compile Include="Facility.cs" />
     <Compile Include="EmergencyDepartmentStatus.cs" />
