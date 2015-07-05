@@ -68,6 +68,8 @@ namespace HealthBuddy.Api.Nhsd
             string json = responseString.Substring(requestDic["callback"].Length + 1, responseString.Length - requestDic["callback"].Length - 2);
             RootObject result = JsonConvert.DeserializeObject<RootObject>(json);
             FacilitySearchResult searchResult = new FacilitySearchResult();
+            var firstSite = result.SiteSearchResponse.SiteSearchResult.ResultList.SiteData[0];
+            
             var facilities = result.SiteSearchResponse.SiteSearchResult.ResultList.SiteData.Select(a => new Facility
                 {
                     Location = new Location
@@ -76,12 +78,31 @@ namespace HealthBuddy.Api.Nhsd
                         Suburb = a.SiteAddress.Suburb,
                         Postcode = a.SiteAddress.Postcode,
                         Latitude = a.SiteAddress.Latitude,
-                        Longitude = a.SiteAddress.Longitude
+                        Longitude = a.SiteAddress.Longitude,
                     },
-                    Name = a.OrganisationName
+                    OpenNow = a.ServiceCollection.ServiceData.OpenNow,
+                    ClosingTime = GetClosingTime(a.ServiceCollection.ServiceData),
+                    Name = a.OrganisationName,
                 }).ToList();
             return facilities;
         }
+
+        private static readonly string[] WEEKDAYS = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+
+        private string GetClosingTime(ServiceData serviceData)
+        {
+            string today = DateTime.Today.DayOfWeek.ToString();
+            
+            var avail = serviceData.Availability_Collection.AvailabilityData.FirstOrDefault(a => a.DayDescription == today
+                || (a.DayDescription == "Weekday" && WEEKDAYS.Contains(a.DayDescription)));
+            if (avail != null)
+            {
+                return avail.ClosingTime.Substring(11, 5);
+            }
+            return null;
+        }
+
+        
 
     }
 }

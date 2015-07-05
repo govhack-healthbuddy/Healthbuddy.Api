@@ -20,5 +20,9 @@ namespace HealthBuddy.Api.Model
         public int? TwitterSentiment { get; set; }
 
         public EmergencyDepartmentStatus EmergencyDepartmentStatus { get; set; }
+
+        public string OpenNow { get; set; }
+
+        public string ClosingTime { get; set; }
     }
 }

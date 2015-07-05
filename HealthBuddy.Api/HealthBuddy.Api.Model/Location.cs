@@ -12,7 +12,6 @@ namespace HealthBuddy.Api.Model
         public string Longitude { get; set; }
         public string Suburb { get; set; }
         public string Postcode { get; set; }
-
         public string Address { get; set; }
     }
 }

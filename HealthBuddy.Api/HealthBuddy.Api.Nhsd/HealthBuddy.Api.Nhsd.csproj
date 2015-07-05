@@ -48,6 +48,7 @@
     <Compile Include="NhsdService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RootObject.cs" />
+    <Compile Include="SingleOrArrayConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
