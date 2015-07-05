@@ -55,8 +55,15 @@ namespace HealthBuddy.Api.Controllers
                 double lat = double.Parse(result.Origin.Latitude);
                 double lng = double.Parse(result.Origin.Longitude);
 
-                var hospitals = db.myhospitals_contact_data.OrderBy(a => (a.Latitude - lat) * (a.Latitude - lat)
-                + (a.Longitude - lng) * (a.Longitude - lng)).Take(5).ToList();
+                var hospitals = db.myhospitals_contact_data
+                    .Where(
+                        a => (!a.Emergency.HasValue || a.Emergency.Value)
+                        && (!a.Child.HasValue || a.Child == isChild)
+                        && (a.Gender == null || a.Gender == gender))
+                    .OrderBy(
+                        a => (a.Latitude - lat) * (a.Latitude - lat)
+                        + (a.Longitude - lng) * (a.Longitude - lng))
+                    .Take(5).ToList();
 
                 var ids = hospitals.Select(a => a.Id).ToArray();
                 var codes = hospitals.Select(a => a.HospitalCode).ToArray();

@@ -47,6 +47,7 @@
           <Property Name="LessThan4HrsPct" Type="decimal" Precision="10" Scale="5" />
           <Property Name="Year" Type="varchar" MaxLength="7" />
           <Property Name="MyHospitalsId" Type="int" />
+          <Property Name="HospitalCode" Type="varchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="myhospitals-contact-data">
           <Key>
@@ -66,6 +67,9 @@
           <Property Name="Latitude" Type="float" />
           <Property Name="Longitude" Type="float" />
           <Property Name="HospitalCode" Type="varchar" MaxLength="4" />
+          <Property Name="Child" Type="bit" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" />
+          <Property Name="Emergency" Type="bit" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -134,6 +138,9 @@
           <Property Name="Latitude" Type="Double" />
           <Property Name="Longitude" Type="Double" />
           <Property Name="HospitalCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Child" Type="Boolean" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Emergency" Type="Boolean" />
         </EntityType>
         <EntityType Name="emergencydept4hourlengthofstaymetadata">
           <Key>
@@ -146,6 +153,7 @@
           <Property Name="LessThan4HrsPct" Type="Decimal" Precision="10" Scale="5" />
           <Property Name="Year" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="MyHospitalsId" Type="Int32" />
+          <Property Name="HospitalCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ED001_HospitalStatus">
           <Key>
@@ -196,6 +204,9 @@
           <EntitySetMapping Name="myhospitals_contact_data">
             <EntityTypeMapping TypeName="GovhackModel.myhospitals_contact_data">
               <MappingFragment StoreEntitySet="myhospitals-contact-data">
+                <ScalarProperty Name="Emergency" ColumnName="Emergency" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Child" ColumnName="Child" />
                 <ScalarProperty Name="HospitalCode" ColumnName="HospitalCode" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
@@ -216,6 +227,7 @@
           <EntitySetMapping Name="emergencydept4hourlengthofstaymetadata">
             <EntityTypeMapping TypeName="GovhackModel.emergencydept4hourlengthofstaymetadata">
               <MappingFragment StoreEntitySet="emergencydept4hourlengthofstaymetadata">
+                <ScalarProperty Name="HospitalCode" ColumnName="HospitalCode" />
                 <ScalarProperty Name="MyHospitalsId" ColumnName="MyHospitalsId" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="LessThan4HrsPct" ColumnName="LessThan4HrsPct" />

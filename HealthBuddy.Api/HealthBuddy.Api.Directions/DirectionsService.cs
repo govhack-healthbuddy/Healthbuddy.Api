@@ -52,21 +52,13 @@ namespace HealthBuddy.Api.Directions
         private void GetTravelTimeForMode(Location origin, Location destination, List<TravelTime> list, TravelMode mode)
         {
             var time = this.GetTravelTime(origin, destination, mode);
-            if (time.HasValue)
+            if (time != null)
             {
-                list.Add(
-                    new TravelTime
-                    {
-                        Mode = mode.ToString(),
-                        Days = time.Value.Days,
-                        Hours = time.Value.Hours,
-                        Minutes = time.Value.Minutes,
-                        Seconds = time.Value.Seconds
-                    });
+                list.Add(time);
             }
         }
 
-        public TimeSpan? GetTravelTime(Location origin, Location destination, TravelMode mode)
+        public TravelTime GetTravelTime(Location origin, Location destination, TravelMode mode)
         {
             string originString = StringForm(origin);
             string destinationString = StringForm(destination);
@@ -95,7 +87,24 @@ namespace HealthBuddy.Api.Directions
                     destination.Latitude = destination.Latitude ?? leg.EndLocation.Latitude.ToString();
                     destination.Longitude = destination.Longitude ?? leg.EndLocation.Longitude.ToString();
 
-                    return leg.Duration.Value;
+                    var transitStep = leg.Steps.FirstOrDefault(a => a.TransitDetails != null);
+
+                    TimeSpan duration = leg.Duration.Value;
+                    TravelTime time = new TravelTime
+                     {
+                         Mode = mode.ToString(),
+                         Days = duration.Days,
+                         Hours = duration.Hours,
+                         Minutes = duration.Minutes,
+                         Seconds = duration.Seconds,
+                         TransitDepartureTime = transitStep == null ? null : transitStep.TransitDetails.DepartureTime.Text,
+                         TransitDepartureStop = transitStep == null ? null : transitStep.TransitDetails.DepartureStop.Name,
+                         TransitArrivalTime = transitStep == null ? null : transitStep.TransitDetails.ArrivalTime.Text,
+                         TransitArrivalStop = transitStep == null ? null : transitStep.TransitDetails.ArrivalStop.Name,
+                         TransitRoute = transitStep == null ? null : transitStep.TransitDetails.Lines.ShortName,
+                         TransitRouteDescription = transitStep == null ? null : transitStep.TransitDetails.Lines.Name
+                     };
+                    return time;
                 }
             }
             return null;

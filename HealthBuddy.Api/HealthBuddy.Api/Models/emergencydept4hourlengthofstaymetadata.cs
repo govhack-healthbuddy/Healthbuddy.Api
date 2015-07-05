@@ -21,5 +21,6 @@ namespace HealthBuddy.Api.Models
         public Nullable<decimal> LessThan4HrsPct { get; set; }
         public string Year { get; set; }
         public Nullable<int> MyHospitalsId { get; set; }
+        public string HospitalCode { get; set; }
     }
 }
