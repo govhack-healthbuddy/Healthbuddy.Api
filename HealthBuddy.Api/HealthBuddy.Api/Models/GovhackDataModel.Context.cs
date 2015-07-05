@@ -31,5 +31,6 @@ namespace HealthBuddy.Api.Models
         public virtual DbSet<emergencydept4hourlengthofstaymetadata> emergencydept4hourlengthofstaymetadata { get; set; }
         public virtual DbSet<ED001_HospitalStatus> ED001_HospitalStatus { get; set; }
         public virtual DbSet<SaCommunityServiceDirectory> SaCommunityServiceDirectories { get; set; }
+        public virtual DbSet<ACHC20150617_DataDotGov> ACHC20150617_DataDotGov { get; set; }
     }
 }

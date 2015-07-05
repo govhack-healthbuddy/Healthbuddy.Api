@@ -5,6 +5,74 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GovhackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACHC20150617_DataDotGov">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ABN" Type="bigint" />
+          <Property Name="Charity_Legal_Name" Type="varchar" MaxLength="222" />
+          <Property Name="Other_Organisation_Names" Type="varchar" MaxLength="4000" />
+          <Property Name="Operating_Countries" Type="varchar" MaxLength="1002" />
+          <Property Name="Address_Type" Type="varchar" MaxLength="10" />
+          <Property Name="Address_Line_1" Type="varchar" MaxLength="52" />
+          <Property Name="Address_Line_2" Type="varchar" MaxLength="52" />
+          <Property Name="Address_Line_3" Type="varchar" MaxLength="46" />
+          <Property Name="Town_City" Type="varchar" MaxLength="40" />
+          <Property Name="State" Type="varchar" MaxLength="10" />
+          <Property Name="Postcode" Type="bigint" />
+          <Property Name="Country" Type="varchar" MaxLength="26" />
+          <Property Name="Charity_Website" Type="varchar" MaxLength="192" />
+          <Property Name="Registration_Date" Type="datetime" />
+          <Property Name="Date_Organisation_Established" Type="datetime" />
+          <Property Name="Charity_Size" Type="varchar" MaxLength="7" />
+          <Property Name="Number_of_Responsible_Persons" Type="bigint" />
+          <Property Name="Financial_Year_End" Type="varchar" MaxLength="10" />
+          <Property Name="Operates_in_ACT" Type="varchar" MaxLength="1" />
+          <Property Name="Operates_in_NSW" Type="varchar" MaxLength="1" />
+          <Property Name="Operates_in_NT" Type="varchar" MaxLength="1" />
+          <Property Name="Operates_in_QLD" Type="varchar" MaxLength="1" />
+          <Property Name="Operates_in_SA" Type="varchar" MaxLength="1" />
+          <Property Name="Operates_in_TAS" Type="varchar" MaxLength="1" />
+          <Property Name="Operates_in_VIC" Type="varchar" MaxLength="1" />
+          <Property Name="Operates_in_WA" Type="varchar" MaxLength="1" />
+          <Property Name="PBI" Type="varchar" MaxLength="1" />
+          <Property Name="HPC" Type="varchar" MaxLength="1" />
+          <Property Name="Preventing_or_relieving_suffering_of_animals" Type="varchar" MaxLength="1" />
+          <Property Name="Advancing_Culture" Type="varchar" MaxLength="1" />
+          <Property Name="Advancing_Education" Type="varchar" MaxLength="1" />
+          <Property Name="Advancing_Health" Type="varchar" MaxLength="1" />
+          <Property Name="Promote_or_oppose_a_change_to_law__government_poll_or_prac" Type="varchar" MaxLength="4000" />
+          <Property Name="Advancing_natual_environment" Type="varchar" MaxLength="1" />
+          <Property Name="Promoting_or_protecting_human_rights" Type="varchar" MaxLength="1" />
+          <Property Name="Purposes_beneficial_to_ther_general_public_and_other_analogous" Type="varchar" MaxLength="1" />
+          <Property Name="Promoting_reconciliation__mutual_respect_and_tolerance" Type="varchar" MaxLength="1" />
+          <Property Name="Advancing_Religion" Type="varchar" MaxLength="1" />
+          <Property Name="Advancing_social_or_public_welfare" Type="varchar" MaxLength="1" />
+          <Property Name="Advancing_security_or_safety_of_Australia_or_Australian_public" Type="varchar" MaxLength="1" />
+          <Property Name="Another_purpose_beneficial_to_the_community" Type="varchar" MaxLength="1" />
+          <Property Name="Aboriginal_or_TSI" Type="varchar" MaxLength="1" />
+          <Property Name="Aged_Persons" Type="varchar" MaxLength="1" />
+          <Property Name="Children" Type="varchar" MaxLength="1" />
+          <Property Name="Communities_Overseas" Type="varchar" MaxLength="1" />
+          <Property Name="Ethnic_Groups" Type="varchar" MaxLength="1" />
+          <Property Name="Gay__Lesbian__Bisexual" Type="varchar" MaxLength="1" />
+          <Property Name="General_Community_in_Australia" Type="varchar" MaxLength="1" />
+          <Property Name="Men" Type="varchar" MaxLength="1" />
+          <Property Name="Migrants__Refugees_or_Asylum_Seekers" Type="varchar" MaxLength="1" />
+          <Property Name="Pre_Post_Release_Offenders" Type="varchar" MaxLength="1" />
+          <Property Name="People_with_Chronic_Illness" Type="varchar" MaxLength="1" />
+          <Property Name="People_with_Disabilities" Type="varchar" MaxLength="1" />
+          <Property Name="People_at_risk_of_homelessness" Type="varchar" MaxLength="1" />
+          <Property Name="Unemployed_Persons" Type="varchar" MaxLength="1" />
+          <Property Name="Veterans_or_their_families" Type="varchar" MaxLength="1" />
+          <Property Name="Victims_of_crime" Type="varchar" MaxLength="1" />
+          <Property Name="Victims_of_Disasters" Type="varchar" MaxLength="1" />
+          <Property Name="Women" Type="varchar" MaxLength="1" />
+          <Property Name="Youth" Type="varchar" MaxLength="1" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+        </EntityType>
         <EntityType Name="AllSaHospitals">
           <Key>
             <PropertyRef Name="Id" />
@@ -116,6 +184,7 @@
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="GovhackModelStoreContainer">
+          <EntitySet Name="ACHC20150617_DataDotGov" EntityType="Self.ACHC20150617_DataDotGov" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AllSaHospitals" EntityType="Self.AllSaHospitals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ED001_HospitalStatus" EntityType="Self.ED001_HospitalStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="emergencydept4hourlengthofstaymetadata" EntityType="Self.emergencydept4hourlengthofstaymetadata" Schema="dbo" store:Type="Tables" />
@@ -141,6 +210,7 @@
           <EntitySet Name="emergencydept4hourlengthofstaymetadata" EntityType="GovhackModel.emergencydept4hourlengthofstaymetadata" />
           <EntitySet Name="ED001_HospitalStatus" EntityType="GovhackModel.ED001_HospitalStatus" />
           <EntitySet Name="SaCommunityServiceDirectories" EntityType="GovhackModel.SaCommunityServiceDirectory" />
+          <EntitySet Name="ACHC20150617_DataDotGov" EntityType="GovhackModel.ACHC20150617_DataDotGov" />
         </EntityContainer>
         <EntityType Name="AllSaHospital">
           <Key>
@@ -244,6 +314,74 @@
           <Property Name="ABN" Type="String" MaxLength="910" FixedLength="false" Unicode="true" />
           <Property Name="Last_updated" Type="DateTime" Precision="0" />
           <Property Name="Internal_Contact_ID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="ACHC20150617_DataDotGov">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ABN" Type="Int64" />
+          <Property Name="Charity_Legal_Name" Type="String" MaxLength="222" FixedLength="false" Unicode="false" />
+          <Property Name="Other_Organisation_Names" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="Operating_Countries" Type="String" MaxLength="1002" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Line_1" Type="String" MaxLength="52" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Line_2" Type="String" MaxLength="52" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Line_3" Type="String" MaxLength="46" FixedLength="false" Unicode="false" />
+          <Property Name="Town_City" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="Int64" />
+          <Property Name="Country" Type="String" MaxLength="26" FixedLength="false" Unicode="false" />
+          <Property Name="Charity_Website" Type="String" MaxLength="192" FixedLength="false" Unicode="false" />
+          <Property Name="Registration_Date" Type="DateTime" Precision="3" />
+          <Property Name="Date_Organisation_Established" Type="DateTime" Precision="3" />
+          <Property Name="Charity_Size" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Number_of_Responsible_Persons" Type="Int64" />
+          <Property Name="Financial_Year_End" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Operates_in_ACT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Operates_in_NSW" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Operates_in_NT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Operates_in_QLD" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Operates_in_SA" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Operates_in_TAS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Operates_in_VIC" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Operates_in_WA" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="PBI" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="HPC" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Preventing_or_relieving_suffering_of_animals" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Advancing_Culture" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Advancing_Education" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Advancing_Health" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Promote_or_oppose_a_change_to_law__government_poll_or_prac" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="Advancing_natual_environment" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Promoting_or_protecting_human_rights" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Purposes_beneficial_to_ther_general_public_and_other_analogous" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Promoting_reconciliation__mutual_respect_and_tolerance" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Advancing_Religion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Advancing_social_or_public_welfare" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Advancing_security_or_safety_of_Australia_or_Australian_public" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Another_purpose_beneficial_to_the_community" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Aboriginal_or_TSI" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Aged_Persons" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Children" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Communities_Overseas" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Ethnic_Groups" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Gay__Lesbian__Bisexual" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="General_Community_in_Australia" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Men" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Migrants__Refugees_or_Asylum_Seekers" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Pre_Post_Release_Offenders" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="People_with_Chronic_Illness" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="People_with_Disabilities" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="People_at_risk_of_homelessness" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Unemployed_Persons" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Veterans_or_their_families" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Victims_of_crime" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Victims_of_Disasters" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Women" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Youth" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -363,6 +501,75 @@
                 <ScalarProperty Name="Supplemental_Address_1" ColumnName="Supplemental Address 1" />
                 <ScalarProperty Name="Street_Address" ColumnName="Street Address" />
                 <ScalarProperty Name="Organization_Name" ColumnName="Organization Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACHC20150617_DataDotGov">
+            <EntityTypeMapping TypeName="GovhackModel.ACHC20150617_DataDotGov">
+              <MappingFragment StoreEntitySet="ACHC20150617_DataDotGov">
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Youth" ColumnName="Youth" />
+                <ScalarProperty Name="Women" ColumnName="Women" />
+                <ScalarProperty Name="Victims_of_Disasters" ColumnName="Victims_of_Disasters" />
+                <ScalarProperty Name="Victims_of_crime" ColumnName="Victims_of_crime" />
+                <ScalarProperty Name="Veterans_or_their_families" ColumnName="Veterans_or_their_families" />
+                <ScalarProperty Name="Unemployed_Persons" ColumnName="Unemployed_Persons" />
+                <ScalarProperty Name="People_at_risk_of_homelessness" ColumnName="People_at_risk_of_homelessness" />
+                <ScalarProperty Name="People_with_Disabilities" ColumnName="People_with_Disabilities" />
+                <ScalarProperty Name="People_with_Chronic_Illness" ColumnName="People_with_Chronic_Illness" />
+                <ScalarProperty Name="Pre_Post_Release_Offenders" ColumnName="Pre_Post_Release_Offenders" />
+                <ScalarProperty Name="Migrants__Refugees_or_Asylum_Seekers" ColumnName="Migrants__Refugees_or_Asylum_Seekers" />
+                <ScalarProperty Name="Men" ColumnName="Men" />
+                <ScalarProperty Name="General_Community_in_Australia" ColumnName="General_Community_in_Australia" />
+                <ScalarProperty Name="Gay__Lesbian__Bisexual" ColumnName="Gay__Lesbian__Bisexual" />
+                <ScalarProperty Name="Ethnic_Groups" ColumnName="Ethnic_Groups" />
+                <ScalarProperty Name="Communities_Overseas" ColumnName="Communities_Overseas" />
+                <ScalarProperty Name="Children" ColumnName="Children" />
+                <ScalarProperty Name="Aged_Persons" ColumnName="Aged_Persons" />
+                <ScalarProperty Name="Aboriginal_or_TSI" ColumnName="Aboriginal_or_TSI" />
+                <ScalarProperty Name="Another_purpose_beneficial_to_the_community" ColumnName="Another_purpose_beneficial_to_the_community" />
+                <ScalarProperty Name="Advancing_security_or_safety_of_Australia_or_Australian_public" ColumnName="Advancing_security_or_safety_of_Australia_or_Australian_public" />
+                <ScalarProperty Name="Advancing_social_or_public_welfare" ColumnName="Advancing_social_or_public_welfare" />
+                <ScalarProperty Name="Advancing_Religion" ColumnName="Advancing_Religion" />
+                <ScalarProperty Name="Promoting_reconciliation__mutual_respect_and_tolerance" ColumnName="Promoting_reconciliation__mutual_respect_and_tolerance" />
+                <ScalarProperty Name="Purposes_beneficial_to_ther_general_public_and_other_analogous" ColumnName="Purposes_beneficial_to_ther_general_public_and_other_analogous" />
+                <ScalarProperty Name="Promoting_or_protecting_human_rights" ColumnName="Promoting_or_protecting_human_rights" />
+                <ScalarProperty Name="Advancing_natual_environment" ColumnName="Advancing_natual_environment" />
+                <ScalarProperty Name="Promote_or_oppose_a_change_to_law__government_poll_or_prac" ColumnName="Promote_or_oppose_a_change_to_law__government_poll_or_prac" />
+                <ScalarProperty Name="Advancing_Health" ColumnName="Advancing_Health" />
+                <ScalarProperty Name="Advancing_Education" ColumnName="Advancing_Education" />
+                <ScalarProperty Name="Advancing_Culture" ColumnName="Advancing_Culture" />
+                <ScalarProperty Name="Preventing_or_relieving_suffering_of_animals" ColumnName="Preventing_or_relieving_suffering_of_animals" />
+                <ScalarProperty Name="HPC" ColumnName="HPC" />
+                <ScalarProperty Name="PBI" ColumnName="PBI" />
+                <ScalarProperty Name="Operates_in_WA" ColumnName="Operates_in_WA" />
+                <ScalarProperty Name="Operates_in_VIC" ColumnName="Operates_in_VIC" />
+                <ScalarProperty Name="Operates_in_TAS" ColumnName="Operates_in_TAS" />
+                <ScalarProperty Name="Operates_in_SA" ColumnName="Operates_in_SA" />
+                <ScalarProperty Name="Operates_in_QLD" ColumnName="Operates_in_QLD" />
+                <ScalarProperty Name="Operates_in_NT" ColumnName="Operates_in_NT" />
+                <ScalarProperty Name="Operates_in_NSW" ColumnName="Operates_in_NSW" />
+                <ScalarProperty Name="Operates_in_ACT" ColumnName="Operates_in_ACT" />
+                <ScalarProperty Name="Financial_Year_End" ColumnName="Financial_Year_End" />
+                <ScalarProperty Name="Number_of_Responsible_Persons" ColumnName="Number_of_Responsible_Persons" />
+                <ScalarProperty Name="Charity_Size" ColumnName="Charity_Size" />
+                <ScalarProperty Name="Date_Organisation_Established" ColumnName="Date_Organisation_Established" />
+                <ScalarProperty Name="Registration_Date" ColumnName="Registration_Date" />
+                <ScalarProperty Name="Charity_Website" ColumnName="Charity_Website" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Town_City" ColumnName="Town_City" />
+                <ScalarProperty Name="Address_Line_3" ColumnName="Address_Line_3" />
+                <ScalarProperty Name="Address_Line_2" ColumnName="Address_Line_2" />
+                <ScalarProperty Name="Address_Line_1" ColumnName="Address_Line_1" />
+                <ScalarProperty Name="Address_Type" ColumnName="Address_Type" />
+                <ScalarProperty Name="Operating_Countries" ColumnName="Operating_Countries" />
+                <ScalarProperty Name="Other_Organisation_Names" ColumnName="Other_Organisation_Names" />
+                <ScalarProperty Name="Charity_Legal_Name" ColumnName="Charity_Legal_Name" />
+                <ScalarProperty Name="ABN" ColumnName="ABN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

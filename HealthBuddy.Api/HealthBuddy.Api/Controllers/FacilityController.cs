@@ -48,12 +48,12 @@ namespace HealthBuddy.Api.Controllers
             // Get the suburb and postcode for the origin location
             var google = new HealthBuddy.Api.Directions.DirectionsService();
             google.Lookup(result.Origin);
+            double lat = double.Parse(result.Origin.Latitude);
+            double lng = double.Parse(result.Origin.Longitude);
 
             if (type == FacilityType.Hospital)
             {
                 // Use GovHack data sets - my hospitals contact list, length of stay data, etc.
-                double lat = double.Parse(result.Origin.Latitude);
-                double lng = double.Parse(result.Origin.Longitude);
 
                 var hospitals = db.myhospitals_contact_data
                     .Where(
@@ -80,6 +80,26 @@ namespace HealthBuddy.Api.Controllers
                         OpenNow = "true",
                     }));
             }
+            else if (type == FacilityType.Community)
+            {
+                // Use ACHC20150617_DataDotGov
+
+                var charities = db.ACHC20150617_DataDotGov
+                    .Where(
+                        a => (a.Advancing_Health == "Y")
+                        && (!isChild || a.Children == "Y")
+                        && (a.Latitude.HasValue && a.Longitude.HasValue))
+                    .OrderBy(
+                        a => (a.Latitude - lat) * (a.Latitude - lat)
+                        + (a.Longitude - lng) * (a.Longitude - lng))
+                    .Take(5).ToList();
+
+                result.Facilities.AddRange(charities.Select(hosp => new Facility
+                {
+                    Name = hosp.Charity_Legal_Name,
+                    Location = GetLocation(hosp)
+                }));
+            }
             else
             {
                 // Use NHSD lookup.
@@ -93,6 +113,18 @@ namespace HealthBuddy.Api.Controllers
                 facility.TravelTimes = google.GetTravelTimes(result.Origin, facility.Location);
             }
             return result;
+        }
+
+        private Location GetLocation(ACHC20150617_DataDotGov charity)
+        {
+            return new Location
+            {
+                Address = charity.Address_Line_1 + " " + charity.Address_Line_2 + " " + charity.Address_Line_3,
+                Suburb = charity.Town_City,
+                Postcode = string.Format("{0:0000}", charity.Postcode),
+                Latitude = charity.Latitude.ToString(),
+                Longitude = charity.Longitude.ToString()
+            };
         }
 
         private static Location GetLocation(myhospitals_contact_data hospital)

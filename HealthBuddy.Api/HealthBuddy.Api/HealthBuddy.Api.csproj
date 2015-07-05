@@ -94,6 +94,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ACHC20150617_DataDotGov.cs">
+      <DependentUpon>GovhackDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AllSaHospital.cs">
       <DependentUpon>GovhackDataModel.tt</DependentUpon>
     </Compile>
